@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "66f2dbf66c31ff1c96d8191e"
+  },
+  "name": "John Garcia",
+  "email": "john.garcia@yahoo.com",
+  "position": "Academic Advisor",
+  "bio": "Students will learn industry-standard software and workflows. Projects include creating realistic 3D models and animations. Emphasis is placed on practical, hands-on experience."
+},
+{
+  "_id": {
+    "$oid": "66f2dbf66c31ff1c96d8191f"
+  },
+  "name": "Mike Davis",
+  "email": "mike.davis@example.com",
+  "position": "IT Support",
+  "bio": "By the end of this course, students will have a professional-quality demo reel. This course covers advanced techniques in visual effects. Emphasis is placed on practical, hands-on experience."
+},
+{
+  "_id": {
+    "$oid": "66f2dbf66c31ff1c96d81920"
+  },
+  "name": "Emma Johnson",
+  "email": "emma.johnson@hotmail.com",
+  "position": "Administration",
+  "bio": "Projects include creating realistic 3D models and animations. Students will learn industry-standard software and workflows. This course covers advanced techniques in visual effects."
+},
+{
+  "_id": {
+    "$oid": "66f2dbf66c31ff1c96d81921"
+  },
+  "name": "Chris Martinez",
+  "email": "chris.martinez@outlook.com",
+  "position": "Administration",
+  "bio": "Students will learn industry-standard software and workflows. Emphasis is placed on practical, hands-on experience. By the end of this course, students will have a professional-quality demo reel."
+}]
