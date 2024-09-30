@@ -29,7 +29,6 @@ export default function Home() {
 
     loadCourses()
   }, [])
-
   // Eliminamos la prop 'items' si no es necesaria
-  return <HomePage courses={courses} isLoading={isLoading} />
+  return <HomePage courses={courses} />
 }
