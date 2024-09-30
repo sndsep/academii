@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { HomePage } from '@/components/home-page'
+import HomePage from '@/components/Home'  // Cambiado a importación por defecto
 import { getCourses } from '@/lib/api'
 
 interface Course {
@@ -30,5 +30,6 @@ export default function Home() {
     loadCourses()
   }, [])
 
-  return <HomePage items={[]} courses={courses} isLoading={isLoading} />
+  // Eliminamos la prop 'items' si no es necesaria
+  return <HomePage courses={courses} isLoading={isLoading} />
 }

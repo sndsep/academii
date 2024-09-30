@@ -11,54 +11,60 @@ const iconMap = {
 }
 
 interface Course {
-  name?: string;
-  icon?: keyof typeof iconMap;
+  id: number;
+  title: string;
+  category: string;
+  icon: string;
   description?: string;
-  duration?: string;
+  duration?: {
+    hours?: number;
+    weeks?: number;
+  };
   difficulty?: string;
-  category?: string;
   image?: string;
-}
-
-interface Professor {
-  name?: string;
-  avatar?: string;
+  professor?: {
+    name?: string;
+    avatar?: string;
+  };
 }
 
 interface FeaturedCourseCardProps {
-  course?: Course;
-  professor?: Professor;
+  course: Course;
 }
 
-const FeaturedCourseCard: React.FC<FeaturedCourseCardProps> = ({ course = {}, professor = {} }) => {
+const FeaturedCourseCard: React.FC<FeaturedCourseCardProps> = ({ course }) => {
   const {
-    name = "Course Name",
-    icon = "Film",
+    title,
+    icon,
     description = "Course description goes here",
-    duration = "8 weeks",
+    duration,
     difficulty = "Intermediate",
-    category = "Uncategorized",
-    image = "/placeholder.svg?height=200&width=300"
+    category,
+    image = "/placeholder.svg?height=200&width=300",
+    professor
   } = course
 
-  const {
-    name: professorName = "Professor Name",
-    avatar = "/placeholder.svg?height=50&width=50"
-  } = professor
+  const professorName = professor?.name || "Professor Name"
+  const professorAvatar = professor?.avatar || "/placeholder.svg?height=50&width=50"
 
   const IconComponent = icon ? iconMap[icon] : Film
+
+  // Formatear la duración
+  const formattedDuration = duration
+    ? `${duration.weeks ? `${duration.weeks} weeks` : ''} ${duration.hours ? `${duration.hours} hours` : ''}`
+    : "Duration not specified"
 
   return (
     <Card className="flex flex-col h-full overflow-hidden">
       <div className="relative h-48 w-full">
         <img 
           src={image} 
-          alt={name} 
+          alt={title} 
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4">
           <div className="text-white text-sm font-semibold mb-2">{category}</div>
-          <h3 className="text-white text-2xl font-bold leading-tight">{name}</h3>
+          <h3 className="text-white text-2xl font-bold leading-tight">{title}</h3>
         </div>
       </div>
       <CardHeader className="pb-2">
@@ -67,11 +73,11 @@ const FeaturedCourseCard: React.FC<FeaturedCourseCardProps> = ({ course = {}, pr
             <IconComponent className="mr-2 h-4 w-4" />
             <span>{difficulty}</span>
             <span className="mx-2">•</span>
-            <span>{duration}</span>
+            <span>{formattedDuration}</span>
           </div>
           <div className="flex items-center">
             <Avatar className="h-6 w-6 mr-2">
-              <AvatarImage src={avatar} alt={professorName} />
+              <AvatarImage src={professorAvatar} alt={professorName} />
               <AvatarFallback><User className="h-4 w-4" /></AvatarFallback>
             </Avatar>
             <span className="text-xs">{professorName}</span>
