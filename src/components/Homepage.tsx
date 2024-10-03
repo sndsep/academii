@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Header from './Header';
 import Footer from './Footer';
@@ -6,8 +8,31 @@ import FeaturedCourses from './FeaturedCourses';
 import ExpertTeachers from './ExpertTeachers';
 import StudentProjects from './StudentProjects';
 import Testimonials from './Testimonials';
+import { Course } from '../types/Course';
 
 const Homepage = () => {
+  const [featuredCourses, setFeaturedCourses] = useState<Course[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFeaturedCourses = async () => {
+      try {
+        const response = await fetch('/api/featuredCourses');
+        if (!response.ok) {
+          throw new Error('Failed to fetch featured courses');
+        }
+        const data: Course[] = await response.json();
+        setFeaturedCourses(data);
+      } catch (error) {
+        console.error('Error fetching featured courses:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchFeaturedCourses();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
@@ -30,7 +55,12 @@ const Homepage = () => {
         </div>
       </header>
 
-      <FeaturedCourses />
+      {isLoading ? (
+        <div>Cargando cursos destacados...</div>
+      ) : (
+        <FeaturedCourses courses={featuredCourses} />
+      )}
+
       <ExpertTeachers />
       <StudentProjects />
       <Testimonials />
