@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createUser, findUserByEmail } from '@/lib/mongodb';
-import bcrypt from 'bcrypt';
+import { createUser, findUserByEmail } from '../../../src/lib/mongodb/users';
+import bcrypt from 'bcryptjs';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -16,7 +16,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userId = await createUser({ email, password: hashedPassword, name, role: 'student' });
+    console.log('Contraseña hasheada:', hashedPassword);
+    const userId = await createUser({
+      email,
+      password: hashedPassword,
+      name,
+      role: 'student', // Cambiado de 'user' a 'student'
+      enrollment_date: { $date: new Date().toISOString() },
+      courses_enrolled: [],
+    });
 
     res.status(201).json({ message: 'Usuario creado exitosamente', userId });
   } catch (error) {

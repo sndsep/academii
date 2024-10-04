@@ -1,10 +1,11 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, Db } from 'mongodb';
 
 const uri = process.env.MONGODB_URI;
 const options = {};
 
-let client;
+let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
+let cachedDb: Db | null = null;
 
 if (!process.env.MONGODB_URI) {
   throw new Error('Please add your Mongo URI to .env.local');
@@ -25,12 +26,21 @@ if (process.env.NODE_ENV === 'development') {
   clientPromise = client.connect();
 }
 
-export async function connectToDatabase() {
+export async function connectToDatabase(): Promise<{ client: MongoClient; db: Db }> {
+  if (cachedDb) {
+    return { client: await clientPromise, db: cachedDb };
+  }
+
   const client = await clientPromise;
-  const db = client.db(process.env.MONGODB_DB);
+  const db = client.db(process.env.MONGODB_DB as string);
+  cachedDb = db;
   return { client, db };
 }
 
 export async function fetchCoursesFromDB() {
   // Implementación de la función
+}
+
+export async function getCourses() {
+  // Implementación de la función getCourses
 }

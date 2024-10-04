@@ -1,6 +1,6 @@
 import CourseCard from '@/components/CourseCard';
-import { Course } from '@/types/Course'; // Cambiado a mayúscula
-import { getCourses } from '@/lib/mongodb'; // Cambiado a getCourses
+import { Course } from '@/types/Course';
+import { getCourses } from '@/lib/mongodb';
 
 export default function CoursesPage({ courses }: { courses: Course[] }) {
   return (

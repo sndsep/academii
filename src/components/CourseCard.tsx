@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Course } from '../types/Course';
 import TeacherProfile from './TeacherProfile';
+import { Teacher } from '../types/Teacher';
 
 interface CourseCardProps {
   course: Course;
@@ -9,9 +10,16 @@ interface CourseCardProps {
 }
 
 export default function CourseCard({ course, variant = 'full' }: CourseCardProps) {
-  const { name, description, coverImage, difficulty, duration, category, instructor } = course;
+  const { name, description, coverImage, difficulty, duration, category, teacher } = course;
   
   const imageSrc = coverImage || `/api/placeholder?width=600&height=400&text=${encodeURIComponent(name)}`;
+
+  const teacherWithDefaults: Teacher = {
+    name: teacher.name,
+    title: teacher.title || '',
+    bio: teacher.bio || '',
+    avatar: teacher.avatar || '',
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -31,7 +39,7 @@ export default function CourseCard({ course, variant = 'full' }: CourseCardProps
           <span className="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">{`${duration.weeks} weeks / ${duration.hours} hours`}</span>
           <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">{category}</span>
         </div>
-        <TeacherProfile teacher={instructor} />
+        <TeacherProfile teacher={teacherWithDefaults} />
       </div>
     </div>
   );

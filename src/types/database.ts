@@ -33,17 +33,22 @@ interface Review {
 }
 
 interface Staff {
-  _id: string;
+  _id: { $oid: string };
   name: string;
-  role: string;
-  // ... otros campos relevantes
+  email: string;
+  position: string;
+  bio: string;
+  password: string;
+  isAdmin: boolean;
 }
 
 interface Teacher {
   _id: string;
   name: string;
+  title: string;
+  bio: string;
+  avatar: string;
   specialization: string;
-  // ... otros campos relevantes
 }
 
 interface SEO {
@@ -62,12 +67,13 @@ interface Testimonial {
 }
 
 interface User {
-  _id: string;
+  _id: { $oid: string };
+  name: string;
   email: string;
   password: string;
-  name: string;
-  role: 'student' | 'admin';
-  // ... otros campos relevantes
+  role: 'student';
+  enrollment_date: { $date: string };
+  courses_enrolled: { $oid: string }[];
 }
 
 export type {

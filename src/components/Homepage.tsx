@@ -9,6 +9,7 @@ import ExpertTeachers from './ExpertTeachers';
 import StudentProjects from './StudentProjects';
 import Testimonials from './Testimonials';
 import { Course } from '../types/Course';
+import StaffList from './StaffList';
 
 const Homepage = () => {
   const [featuredCourses, setFeaturedCourses] = useState<Course[]>([]);
@@ -64,6 +65,7 @@ const Homepage = () => {
       <ExpertTeachers />
       <StudentProjects />
       <Testimonials />
+      <StaffList />
 
       {/* Call to Action */}
       <section className="bg-purple-600 text-white py-16">

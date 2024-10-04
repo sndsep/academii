@@ -1,21 +1,15 @@
+import { Teacher } from './Teacher';
+
 export interface Course {
   _id: string;
   name: string;
   description: string;
+  coverImage?: string;
   difficulty: string;
-  price: number;
-  coverImage: string;
-  enrolledStudents: number;
-  instructor: {
-    name: string;
-    title: string;
-    bio: string;
-    avatar: string;
-  };
   duration: {
-    hours: number;
     weeks: number;
+    hours: number;
   };
-  features: string[];
   category: string;
+  teacher: Teacher;
 }

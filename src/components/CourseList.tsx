@@ -1,16 +1,18 @@
-import CourseCard from './CourseCard';
-import { Course } from '../types/Course';
+import React from 'react';
+import { Course } from '@/types/database';
 
 interface CourseListProps {
   courses: Course[];
 }
 
-export default function CourseList({ courses }: CourseListProps) {
+const CourseList: React.FC<CourseListProps> = ({ courses }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div>
       {courses.map((course) => (
-        <CourseCard key={course._id} course={course as unknown as Course} variant="full" />
+        <div key={course._id.$oid}>{course.name}</div>
       ))}
     </div>
   );
-}
+};
+
+export default CourseList;

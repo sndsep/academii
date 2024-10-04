@@ -4,18 +4,25 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/sndsep/academii"
+    "url": "git+https://github.com/sndsep/academii.git"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "compile": "tsc --project tsconfig.json",
+    "update-password": "ts-node scripts/updatePassword.ts",
+    "insert-staff": "ts-node scripts/insertStaffData.ts"
   },
   "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/mongodb": "^4.0.6",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "canvas": "^2.11.2",
+    "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.447.0",
     "mongodb": "^6.9.0",
@@ -30,14 +37,28 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.7",
-    "@types/node": "^20",
+    "@types/node": "^20.16.10",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-icons": "^2.2.7",
     "autoprefixer": "^10.4.20",
     "eslint": "^8",
     "eslint-config-next": "14.2.14",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
-    "typescript": "^5"
-  }
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5"
+  },
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "main": "tailwind.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sndsep/academii/issues"
+  },
+  "homepage": "https://github.com/sndsep/academii#readme"
 }
